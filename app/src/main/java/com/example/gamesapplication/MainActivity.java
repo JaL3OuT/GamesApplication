@@ -23,7 +23,6 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView ;
     Button teams;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
                 Log.e("throw", "LIste Size " + t);
-
             }
         });
         teams = findViewById(R.id.buttonEquipe);

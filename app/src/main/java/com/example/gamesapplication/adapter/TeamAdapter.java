@@ -16,6 +16,12 @@ import java.util.List;
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyViewHolder> {
     List<DataTeams> dataTeams;
 
+    ItemClickTeam clickTeam;
+
+    public void setClickTeam(ItemClickTeam clickTeam) {
+        this.clickTeam = clickTeam;
+    }
+
     public TeamAdapter(List<DataTeams> dataTeams) {
         this.dataTeams = dataTeams;
     }
@@ -28,13 +34,25 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        DataTeams dataTeam = dataTeams.get(position);
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+        final DataTeams dataTeam = dataTeams.get(position);
         holder.nom.setText(dataTeam.getFullName() + " " + dataTeam.getAbbreviation());
         holder.city.setText(dataTeam.getCity());
         holder.abrev.setText(dataTeam.getName());
         holder.division.setText(dataTeam.getDivision());
         holder.conference.setText(dataTeam.getConference());
+        // final Context context = holder.itemView.getContext();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage(dataTeam.getAbbreviation());
+                builder.setTitle(dataTeam.getFullName());
+                AlertDialog dialog = builder.create();
+                dialog.show();*/
+                clickTeam.itemClickTeam(dataTeam, position);
+            }
+        });
     }
 
     @Override
@@ -54,4 +72,5 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyViewHolder> 
             conference = itemView.findViewById(R.id.conference);
         }
     }
+
 }
