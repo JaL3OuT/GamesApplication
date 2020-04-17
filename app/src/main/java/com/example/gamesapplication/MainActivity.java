@@ -1,12 +1,15 @@
 package com.example.gamesapplication;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.util.Log;
 
 import com.example.gamesapplication.adapter.GamesAdapter;
 import com.example.gamesapplication.model.ApiResponse;
@@ -19,6 +22,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView ;
+    Button teams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +43,18 @@ public class MainActivity extends AppCompatActivity {
                         recyclerView.setAdapter(gamesAdapter);
                     }
                 }
-
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
                 Log.e("throw", "LIste Size " + t);
 
+            }
+        });
+        teams = findViewById(R.id.buttonEquipe);
+        teams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TeamsActivity.class);
+                startActivity(intent);
             }
         });
     }
